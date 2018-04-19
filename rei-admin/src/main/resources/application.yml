@@ -2,8 +2,8 @@
 ##################  所有profile共有的配置  #################
 ##########################################################
 
-###################  guns配置  ###################
-guns:
+###################  REI配置  ###################
+rei:
   swagger-open: true #是否开启swagger (true/false)
   kaptcha-open: false #是否开启登录时验证码 (true/false)
   #file-upload-path: d:/tmp  #文件上传目录(不配置的话为java.io.tmpdir目录)
@@ -36,7 +36,7 @@ spring:
   mvc:
     static-path-pattern: /static/**
     view:
-      prefix: /WEB-INF/view
+      prefix: /WEB-INF/views
   http:
     converters:
       preferred-json-mapper: fastjson
@@ -53,8 +53,8 @@ spring:
 
 ###################  mybatis-plus配置  ###################
 mybatis-plus:
-  mapper-locations: classpath*:com/stylefeng/guns/**/mapping/*.xml
-  typeAliasesPackage: com.stylefeng.guns.modular.system.model
+  mapper-locations: classpath*:com/bynow/rei/core/**/mapping/*.xml
+  typeAliasesPackage: com.bynow.rei.core.module.entity
   global-config:
     id-type: 0  #0:数据库ID自增   1:用户输入id  2:全局唯一id(IdWorker)  3:全局唯一ID(uuid)
     db-column-underline: false
@@ -77,30 +77,18 @@ mybatis-plus:
 spring:
   profiles: dev
   datasource:
-    url: jdbc:mysql://47.97.124.4:3306/guns?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/rei?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
     username: root
     password: 123456
-    db-name: guns
+    db-name: rei
     filters: log4j,wall,mergeStat
 
-#flowable数据源和多数据源配置
-guns:
-  flowable:
-    datasource:
-      url: jdbc:mysql://47.97.124.4:3306/guns_flowable?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
-      username: root
-      password: 123456
-  muti-datasource:
-    default-dataSource-name: dataSourceGuns #默认的数据源名称
-    url: jdbc:mysql://47.97.124.4:3306/guns_flowable?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
-    username: root
-    password: 123456
 
 logging:
   level.root: info
   level.com.stylefeng: debug
   path: logs/
-  file: guns.log
+  file: rei.log
 
 ---
 
@@ -110,13 +98,13 @@ logging:
 spring:
   profiles: produce
   datasource:
-      url: jdbc:mysql://47.97.124.4:3306/guns?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+      url: jdbc:mysql://127.0.0.1:3306/rei?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
       username: root
       password: 123456
       filters: log4j,wall,mergeStat
 
 logging:
-  level.root: warn
+  level.root: debug
   path: logs/
-  file: guns.log
+  file: rei.log
 
