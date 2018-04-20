@@ -17,7 +17,8 @@ public class TestController {
     private TestService testService;
 
     @RequestMapping("/test")
-    public Map<String,Object> test(){
+    public Map<String,Object> test()  {
+
         Map<String,Object> map = new HashMap<>();
         map.put("map", testService.test());
         return  map;
