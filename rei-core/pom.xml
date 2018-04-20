@@ -17,6 +17,11 @@
     </parent>
 
     <dependencies>
+        <dependency>
+            <groupId>com.bynow</groupId>
+            <artifactId>rei-common</artifactId>
+        </dependency>
+
         <!--通用依赖-->
         <dependency>
             <groupId>com.baomidou</groupId>
@@ -69,9 +74,6 @@
             <artifactId>spring-boot-starter-aop</artifactId>
             <scope>provided</scope>
         </dependency>
-
-        <!--缓存-->
-
     </dependencies>
 
     <build>

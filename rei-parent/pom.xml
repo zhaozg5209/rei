@@ -178,6 +178,7 @@
                 <artifactId>hutool-http</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 
