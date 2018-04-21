@@ -1,6 +1,6 @@
 package com.bynow.rei.generator.engine.base;
 
-import com.stylefeng.guns.core.util.ToolUtil;
+import com.bynow.rei.core.util.ToolUtil;
 import com.sun.javafx.PlatformUtil;
 import org.beetl.core.Configuration;
 import org.beetl.core.GroupTemplate;
@@ -19,11 +19,11 @@ import java.util.Properties;
  * @author fengshuonan
  * @date 2017-05-07 22:15
  */
-public abstract class GunsTemplateEngine extends AbstractTemplateEngine {
+public abstract class ReiTemplateEngine extends AbstractTemplateEngine {
 
     private GroupTemplate groupTemplate;
 
-    public GunsTemplateEngine() {
+    public ReiTemplateEngine() {
         initBeetlEngine();
     }
 

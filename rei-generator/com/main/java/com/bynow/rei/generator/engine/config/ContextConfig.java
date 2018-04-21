@@ -1,7 +1,7 @@
 package com.bynow.rei.generator.engine.config;
 
 
-import com.stylefeng.guns.core.util.ToolUtil;
+import com.bynow.rei.core.util.ToolUtil;
 
 /**
  * 全局配置

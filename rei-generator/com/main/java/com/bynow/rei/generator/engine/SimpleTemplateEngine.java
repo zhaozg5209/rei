@@ -1,8 +1,8 @@
 package com.bynow.rei.generator.engine;
 
 
-import com.stylefeng.guns.core.util.ToolUtil;
-import com.stylefeng.guns.generator.engine.base.GunsTemplateEngine;
+import com.bynow.rei.core.util.ToolUtil;
+import com.bynow.rei.generator.engine.base.ReiTemplateEngine;
 
 /**
  * 通用的模板生成引擎
@@ -10,7 +10,7 @@ import com.stylefeng.guns.generator.engine.base.GunsTemplateEngine;
  * @author fengshuonan
  * @date 2017-05-09 20:32
  */
-public class SimpleTemplateEngine extends GunsTemplateEngine {
+public class SimpleTemplateEngine extends ReiTemplateEngine {
 
     @Override
     protected void generatePageEditHtml() {

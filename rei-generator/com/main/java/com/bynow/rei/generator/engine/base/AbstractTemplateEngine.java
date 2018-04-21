@@ -1,7 +1,7 @@
 package com.bynow.rei.generator.engine.base;
 
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
-import com.stylefeng.guns.generator.engine.config.*;
+import com.bynow.rei.generator.engine.config.*;
 
 /**
  * 模板生成父类
