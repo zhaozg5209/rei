@@ -1,6 +1,6 @@
 # REI
 # VERSION 1.0.0
-![image](https://raw.githubusercontent.com/ByNow/rei/master/rei-admin/src/main/webapp/static/images/rei.jpg)
+![image](https://raw.githubusercontent.com/ByNow/rei/master/rei-admin/src/main/webapp/static/img/rei.jpg)
 
 # 关于REI
 REI是基于springboot框架的maven多模块项目,修改开源项目guns
