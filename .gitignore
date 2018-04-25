@@ -5,5 +5,5 @@ logs
 *.iml
 .project
 .classpath
-/src/main/resources/sqlite3.db
+.log
 /config/
