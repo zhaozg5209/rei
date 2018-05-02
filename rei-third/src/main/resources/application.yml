@@ -1,0 +1,9 @@
+server:
+    address: 127.0.0.1 #自己主机的IP地址
+    port: 8000 #端口
+spring:
+  rabbitmq:
+    addresses: 127.0.0.1:5672 #MQ IP 和 端口
+    username: rabbit #MQ登录名
+    password: 123456 #MQ登录密码
+    virtual-host: test #MQ的虚拟主机名称
