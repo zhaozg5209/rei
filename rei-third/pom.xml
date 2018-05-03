@@ -20,6 +20,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.bynow</groupId>
+            <artifactId>rei-core</artifactId>
+        </dependency>
 
     </dependencies>
 </project>

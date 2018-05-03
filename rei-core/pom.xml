@@ -91,11 +91,5 @@
             <artifactId>ehcache-core</artifactId>
             <scope>provided</scope>
         </dependency>
-
-        <dependency>
-            <groupId>com.bynow</groupId>
-            <artifactId>rei-third</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 </project>
