@@ -11,6 +11,7 @@ import com.bynow.rei.core.support.HttpKit;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.CredentialsException;
 import org.apache.shiro.authc.DisabledAccountException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -81,6 +82,18 @@ public class GlobalExceptionHandler {
         model.addAttribute("tips", "账号密码错误");
         return "/login.html";
     }
+
+    /**
+     * 密码输入不一致
+//     */
+//    @ExceptionHandler(CredentialsException.class)
+//    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+//    public String twopwdnotmacth(CredentialsException e, Model model) {
+//        String username = HttpKit.getRequest().getParameter("username");
+//        LogManager.me().executeLog(LogTaskFactory.loginLog(username, "两次输入密码不一致", HttpKit.getIp()));
+//        model.addAttribute("tips", "两次输入密码不一致");
+//        return "/regesiter.html";
+//    }
 
     /**
      * 验证码错误异常

@@ -12,6 +12,7 @@
         <module>../rei-admin</module>
         <module>../rei-core</module>
         <module>../rei-rest</module>
+        <module>../rei-third</module>
         <module>../rei-generator</module>
     </modules>
 

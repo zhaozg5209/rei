@@ -1,5 +1,7 @@
 package com.bynow.rei.modular.system.controller;
 
+import com.bynow.rei.core.common.exception.BizExceptionEnum;
+import com.bynow.rei.core.exception.ReiException;
 import com.bynow.rei.core.node.MenuNode;
 import com.bynow.rei.core.support.HttpKit;
 import com.bynow.rei.core.util.ToolUtil;
@@ -130,6 +132,25 @@ public class LoginController extends BaseController {
         ShiroKit.getSession().setAttribute("sessionFlag", true);
 
         return REDIRECT + "/";
+    }
+
+    /**
+     * 点击注册执行的动作
+     */
+    @RequestMapping(value = "/regesiter", method = RequestMethod.POST)
+    public String regesiterVali(Model model) {
+
+        String username = super.getPara("username").trim();
+        String password = super.getPara("password").trim();
+        String checkPassword = super.getPara("checkPassword").trim();
+
+        if(!password.equals(checkPassword)){
+           throw new ReiException(BizExceptionEnum.TWO_PWD_NOT_MATCH);
+        }
+
+
+
+        return REDIRECT + "/login.html";
     }
 
     /**
