@@ -84,6 +84,14 @@ public class LoginController extends BaseController {
     }
 
     /**
+     * 跳转到注册页面
+     */
+    @RequestMapping(value = "/regesiter", method = RequestMethod.GET)
+    public String regesiter() {
+       return "/regesiter.html";
+    }
+
+    /**
      * 点击登录执行的动作
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
