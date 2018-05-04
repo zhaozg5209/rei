@@ -2,7 +2,9 @@ package com.bynow.rei.core.aop;
 
 import com.bynow.rei.core.base.tips.ErrorTip;
 import com.bynow.rei.core.common.exception.BizExceptionEnum;
+import com.bynow.rei.core.common.exception.InputInvildException;
 import com.bynow.rei.core.common.exception.InvalidKaptchaException;
+import com.bynow.rei.core.common.exception.TwoPwdNotMatchException;
 import com.bynow.rei.core.exception.ReiException;
 import com.bynow.rei.core.log.LogManager;
 import com.bynow.rei.core.log.factory.LogTaskFactory;
@@ -11,7 +13,6 @@ import com.bynow.rei.core.support.HttpKit;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.CredentialsException;
 import org.apache.shiro.authc.DisabledAccountException;
-import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -85,15 +86,25 @@ public class GlobalExceptionHandler {
 
     /**
      * 密码输入不一致
-//     */
-//    @ExceptionHandler(CredentialsException.class)
-//    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
-//    public String twopwdnotmacth(CredentialsException e, Model model) {
-//        String username = HttpKit.getRequest().getParameter("username");
-//        LogManager.me().executeLog(LogTaskFactory.loginLog(username, "两次输入密码不一致", HttpKit.getIp()));
-//        model.addAttribute("tips", "两次输入密码不一致");
-//        return "/regesiter.html";
-//    }
+     */
+    @ExceptionHandler(TwoPwdNotMatchException.class)
+    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+    public String twopwdnotmatch(TwoPwdNotMatchException e, Model model) {
+        LogManager.me().executeLog(LogTaskFactory.loginLog("", "两次输入密码不一致", HttpKit.getIp()));
+        model.addAttribute("tips", "两次输入密码不一致");
+        return "/regesiter.html";
+    }
+
+    /**
+     * 输入格式非法
+     */
+    @ExceptionHandler(InputInvildException.class)
+    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+    public String inputInvild(InputInvildException e, Model model) {
+        LogManager.me().executeLog(LogTaskFactory.loginLog("", "输入格式非法", HttpKit.getIp()));
+        model.addAttribute("tips", "输入格式非法");
+        return "/regesiter.html";
+    }
 
     /**
      * 验证码错误异常

@@ -1,10 +1,12 @@
 package com.bynow.rei.modular.system.controller;
 
 import com.bynow.rei.core.common.exception.BizExceptionEnum;
+import com.bynow.rei.core.common.exception.InputInvildException;
+import com.bynow.rei.core.common.exception.TwoPwdNotMatchException;
 import com.bynow.rei.core.exception.ReiException;
 import com.bynow.rei.core.node.MenuNode;
 import com.bynow.rei.core.support.HttpKit;
-import com.bynow.rei.core.util.ToolUtil;
+import com.bynow.rei.core.util.*;
 import com.google.code.kaptcha.Constants;
 import com.bynow.rei.core.base.controller.BaseController;
 import com.bynow.rei.core.common.exception.InvalidKaptchaException;
@@ -13,8 +15,6 @@ import com.bynow.rei.core.log.factory.LogTaskFactory;
 import com.bynow.rei.core.node.MenuNode;
 import com.bynow.rei.core.shiro.ShiroKit;
 import com.bynow.rei.core.shiro.ShiroUser;
-import com.bynow.rei.core.util.ApiMenuFilter;
-import com.bynow.rei.core.util.KaptchaUtil;
 import com.bynow.rei.core.util.ToolUtil;
 import com.bynow.rei.modular.system.model.User;
 import com.bynow.rei.modular.system.service.IMenuService;
@@ -143,10 +143,12 @@ public class LoginController extends BaseController {
         String username = super.getPara("username").trim();
         String password = super.getPara("password").trim();
         String checkPassword = super.getPara("checkPassword").trim();
+        String email = super.getPara("email  ").trim();
 
-        if(!password.equals(checkPassword)){
-           throw new ReiException(BizExceptionEnum.TWO_PWD_NOT_MATCH);
-        }
+        if(!password.equals(checkPassword))
+                throw new TwoPwdNotMatchException();
+        if(RegexValidateUtil.checkEmail(username))
+                throw new InputInvildException();
 
 
 
