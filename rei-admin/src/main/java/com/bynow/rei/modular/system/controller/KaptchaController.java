@@ -105,7 +105,7 @@ public class KaptchaController {
         }catch (Exception e){
             //如果找不到图片就返回一个默认图片
             try {
-                response.sendRedirect("/static/img/girl.gif");
+                response.sendRedirect("/static/img/rei.jpg");
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
