@@ -1,7 +1,6 @@
 package com.bynow.rei.third.rabbitmq.task;
 
 import com.bynow.rei.core.util.SerializeUtil;
-import com.bynow.rei.third.rabbitmq.TestUser;
 import com.bynow.rei.third.rabbitmq.config.RabbitMqConfig;
 import com.rabbitmq.client.Channel;
 import org.springframework.amqp.core.AcknowledgeMode;
@@ -41,9 +40,7 @@ public class TopicAmqpConfiguration {
         return new ChannelAwareMessageListener() {
             @Override
             public void onMessage(Message message, Channel channel) throws Exception {
-                TestUser testUser = (TestUser) SerializeUtil.unserialize(message.getBody());
-                System.out.println("TOPICTEST1："+testUser.toString());
-                channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
+               // channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
 
             }
         };

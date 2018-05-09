@@ -30,6 +30,15 @@
            transactionalMode="off">
     </cache>
 
+    <!-- 邮件验证码 120s-->
+    <cache name="EMAILCACHE"
+           maxElementsInMemory="1000"
+           eternal="false"
+           timeToIdleSeconds="120"
+           timeToLiveSeconds="120"
+           overflowToDisk="false">
+    </cache>
+
 </ehcache>
 
     <!--

@@ -1,7 +1,10 @@
 package com.bynow.rei.third.rabbitmq.config;
 
+import com.bynow.rei.core.cache.EhcacheFactory;
+import com.bynow.rei.core.util.CodeUtil;
 import com.bynow.rei.core.util.SerializeUtil;
-import com.bynow.rei.third.rabbitmq.TestUser;
+import com.bynow.rei.third.mail.SendMailUtil;
+import com.bynow.rei.third.rabbitmq.dto.EmailMessage;
 import com.rabbitmq.client.Channel;
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.core.Message;
@@ -23,34 +26,29 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @AutoConfigureAfter(RabbitMqConfig.class)
 public class ExampleAmqpConfiguration {
-    @Bean("testQueueContainer")
+    @Bean("emailQueueContainer")
     public MessageListenerContainer messageListenerContainer(ConnectionFactory connectionFactory) {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
-        container.setQueueNames("TESTQUEUE");
+        container.setQueueNames("EMAILQUEUE");
         container.setMessageListener(exampleListener());
         container.setAcknowledgeMode(AcknowledgeMode.MANUAL);
         return container;
     }
 
 
-    @Bean("testQueueListener")
+    //回调
+    @Bean("emailQueueListener")
     public ChannelAwareMessageListener exampleListener() {
         return new ChannelAwareMessageListener() {
             @Override
             public void onMessage(Message message, Channel channel) throws Exception {
-                TestUser testUser = (TestUser) SerializeUtil.unserialize(message.getBody());
-                //通过设置TestUser的name来测试回调，分别发两条消息，一条UserName为1，一条为2，查看控制台中队列中消息是否被消费
-                if ("2".equals(testUser.getUserName())){
-                    System.out.println(testUser.toString());
-                    channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
-                }
-
-                if ("1".equals(testUser.getUserName())){
-                    System.out.println(testUser.toString());
-                    channel.basicNack(message.getMessageProperties().getDeliveryTag(),false,true);
-                }
-
+                EmailMessage emailMessage = (EmailMessage) SerializeUtil.unserialize(message.getBody());
+                String code = CodeUtil.generateUpperString(4);
+                SendMailUtil.sendEmail(code,emailMessage.getEmail());
+                //缓存用户名与验证码
+                EhcacheFactory.getInstance().put("EMAILCACHE",emailMessage.getUsername(),code);
+                channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
             }
         };
     }

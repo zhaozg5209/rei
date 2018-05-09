@@ -44,9 +44,9 @@ public class RabbitMqExchangeConfig {
 
     @Bean
     Queue queueTest(RabbitAdmin rabbitAdmin){
-        Queue queue = new Queue(RabbitMqEnum.QueueName.TESTQUEUE.getCode());
+        Queue queue = new Queue(RabbitMqEnum.QueueName.EMAILQUEUE.getCode());
         rabbitAdmin.declareQueue(queue);
-        logger.debug("测试队列实例化完成");
+        logger.debug("邮件队列实例化完成");
         return queue;
     }
 
@@ -71,9 +71,9 @@ public class RabbitMqExchangeConfig {
     //在此处完成队列和交换机绑定
     @Bean
     Binding bindingQueueTest(Queue queueTest, DirectExchange exchange, RabbitAdmin rabbitAdmin){
-        Binding binding = BindingBuilder.bind(queueTest).to(exchange).with(RabbitMqEnum.QueueEnum.TESTQUEUE.getCode());
+        Binding binding = BindingBuilder.bind(queueTest).to(exchange).with(RabbitMqEnum.QueueEnum.EMAILQUEUE.getCode());
         rabbitAdmin.declareBinding(binding);
-        logger.debug("测试队列与直连型交换机绑定完成");
+        logger.debug("邮件队列与直连型交换机绑定完成");
         return binding;
     }
     //topic binding1

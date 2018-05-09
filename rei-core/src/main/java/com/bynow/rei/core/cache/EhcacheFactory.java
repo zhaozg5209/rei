@@ -31,6 +31,8 @@ public class EhcacheFactory extends BaseCacheFactory {
 	private static CacheManager cacheManager;
 	private static volatile Object locker = new Object();
 	private static final Logger log = LoggerFactory.getLogger(EhcacheFactory.class);
+
+	public static EhcacheFactory getInstance(){ return new EhcacheFactory();}
 	
 	private static CacheManager getCacheManager() {
 		if (cacheManager == null) {

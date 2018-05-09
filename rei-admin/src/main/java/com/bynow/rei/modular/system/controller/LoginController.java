@@ -1,35 +1,43 @@
 package com.bynow.rei.modular.system.controller;
 
-import com.bynow.rei.core.common.exception.BizExceptionEnum;
-import com.bynow.rei.core.common.exception.InputInvildException;
-import com.bynow.rei.core.common.exception.TwoPwdNotMatchException;
-import com.bynow.rei.core.exception.ReiException;
-import com.bynow.rei.core.node.MenuNode;
-import com.bynow.rei.core.support.HttpKit;
-import com.bynow.rei.core.util.*;
-import com.google.code.kaptcha.Constants;
 import com.bynow.rei.core.base.controller.BaseController;
+import com.bynow.rei.core.cache.EhcacheFactory;
+import com.bynow.rei.core.cache.ICache;
+import com.bynow.rei.core.common.exception.InputInvildException;
 import com.bynow.rei.core.common.exception.InvalidKaptchaException;
+import com.bynow.rei.core.common.exception.TwoPwdNotMatchException;
 import com.bynow.rei.core.log.LogManager;
 import com.bynow.rei.core.log.factory.LogTaskFactory;
 import com.bynow.rei.core.node.MenuNode;
 import com.bynow.rei.core.shiro.ShiroKit;
 import com.bynow.rei.core.shiro.ShiroUser;
+import com.bynow.rei.core.support.HttpKit;
+import com.bynow.rei.core.util.ApiMenuFilter;
+import com.bynow.rei.core.util.KaptchaUtil;
+import com.bynow.rei.core.util.RegexValidateUtil;
 import com.bynow.rei.core.util.ToolUtil;
 import com.bynow.rei.modular.system.model.User;
 import com.bynow.rei.modular.system.service.IMenuService;
 import com.bynow.rei.modular.system.service.IUserService;
+import com.bynow.rei.third.rabbitmq.dto.EmailMessage;
+import com.google.code.kaptcha.Constants;
+import com.google.common.collect.Maps;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageProperties;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
-
-import static com.bynow.rei.core.support.HttpKit.getIp;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * 登录控制器
@@ -45,6 +53,13 @@ public class LoginController extends BaseController {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private AmqpTemplate amqpTemplate;
+
+    private ICache iCache;
+
+
 
     /**
      * 跳转到主页
@@ -143,25 +158,50 @@ public class LoginController extends BaseController {
         String username = super.getPara("username").trim();
         String password = super.getPara("password").trim();
         String checkPassword = super.getPara("checkPassword").trim();
-        String email = super.getPara("email  ").trim();
+        String email = super.getPara("email").trim();
+        String code = super.getPara("code").trim();
 
         if(!password.equals(checkPassword))
                 throw new TwoPwdNotMatchException();
-        if(RegexValidateUtil.checkEmail(username))
+        if(!RegexValidateUtil.checkEmail(email))
                 throw new InputInvildException();
-
-
-
+        if(!EhcacheFactory.getInstance().get("EMAILCACHE",username).equals(code))
+                throw new InputInvildException();
         return REDIRECT + "/login.html";
     }
 
     /**
-     * 退出登录
+     *  获得邮箱验证码
      */
+    @RequestMapping(value = "/getEmailCode", method = RequestMethod.POST)
+    @ResponseBody
+    public void getEmailCode(EmailMessage message) {
+        if(!RegexValidateUtil.checkEmail(message.getEmail()))
+            throw new InputInvildException();
+        if(!message.getPassword().equals(message.getCheckPassword()))
+            throw new TwoPwdNotMatchException();
+        //创建消息
+       sendDataMessage("EMAILQUEUE",message);
+    }
+
+
+
+
+        /**
+         * 退出登录
+         */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logOut() {
         LogManager.me().executeLog(LogTaskFactory.exitLog(ShiroKit.getUser().getId(), HttpKit.getIp()));
         ShiroKit.getSubject().logout();
         return REDIRECT + "/login";
+    }
+
+    public void sendDataMessage(String queueKey,Object object){
+        MessageProperties messageProperties = new MessageProperties();
+        messageProperties.setMessageId(UUID.randomUUID().toString());
+        RabbitTemplate template = new RabbitTemplate();
+        Message message = template.getMessageConverter().toMessage(object,messageProperties);
+        amqpTemplate.convertAndSend(queueKey,message);
     }
 }

@@ -69,6 +69,13 @@ mybatis-plus:
     multipleResultSetsEnabled: true #开启的话，延时加载一个属性时会加载该对象全部属性，否则按需加载属性
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印sql语句,调试用
 
+rabbitmq:
+  addresses: 47.97.124.4:5672 #MQ IP 和 端口
+  username: bynow #MQ登录名
+  password: 123456 #MQ登录密码
+  publisher-confirms: true
+  virtual-host: / #MQ的虚拟主机名称
+
 ---
 
 ##########################################################

@@ -43,7 +43,7 @@ public class RabbitMqEnum {
      * creat_date: 2017/10/31
      **/
     public enum QueueName {
-        TESTQUEUE("TESTQUEUE", "测试队列"),
+        EMAILQUEUE("EMAILQUEUE", "邮件队列"),
         TOPICTEST1("TOPICTEST1", "topic测试队列"),
         TOPICTEST2("TOPICTEST2", "topic测试队列");
 
@@ -71,7 +71,7 @@ public class RabbitMqEnum {
      * creat_date: 2017/10/31
      **/
     public enum QueueEnum {
-        TESTQUEUE("TESTQUEUE1", "测试队列key"),
+        EMAILQUEUE("EMAILQUEUE", "邮件队列key"),
         TESTTOPICQUEUE1("*.TEST.*", "topic测试队列key"),
         TESTTOPICQUEUE2("lazy.#", "topic测试队列key");
 
