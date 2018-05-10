@@ -70,9 +70,9 @@ mybatis-plus:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印sql语句,调试用
 
 rabbitmq:
-  addresses: 47.97.124.4:5672 #MQ IP 和 端口
-  username: bynow #MQ登录名
-  password: 123456 #MQ登录密码
+  addresses: 127.0.0.1:5672 #MQ IP 和 端口
+  username: rabbit #MQ登录名
+  password: rabbit #MQ登录密码
   publisher-confirms: true
   virtual-host: / #MQ的虚拟主机名称
 
@@ -84,7 +84,7 @@ rabbitmq:
 spring:
   profiles: dev
   datasource:
-    url: jdbc:mysql://47.97.124.4:3306/rei?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/rei?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
     username: root
     password: 123456
     db-name: rei
@@ -104,7 +104,7 @@ logging:
 spring:
   profiles: produce
   datasource:
-      url: jdbc:mysql://47.97.124.4:3306/rei?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+      url: jdbc:mysql://127.0.0.1:3306/rei?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
       username: root
       password: 123456
       filters: log4j,wall,mergeStat
