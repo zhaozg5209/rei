@@ -22,6 +22,10 @@ AOP处理全局异常
 ### 2018/05/02
 创建rei-third模块,添加rabbitmq
 
+### 2018/05/10
+使用rabbitmq+javamail完成邮件注册模块
+迁移项目所需H5样式至rei-web的vue.js项目
+
 
 
 

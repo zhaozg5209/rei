@@ -57,17 +57,19 @@
 </body>
 </html>
 <script>
-        function getCode() {
-            $.ajax({
-                url:  url = "${ctxPath}/getEmailCode",
-                data:'username='+$('#username').val()+"&password="+$('#password').val()+"&checkPassword="+$('#checkPassword').val()+"&email="+$('#email').val(),
-                type: "POST",
-                success: function(result) {
-                    console.log(result.code);
-                },
-                error: function(result) {
-                    alert('系统繁忙!请稍后再试。');
-                }
+    function getCode() {
+        $.ajax({
+            url:  url = "${ctxPath}/getEmailCode",
+            data:'username='+$('#username').val()+"&password="+$('#password').val()+"&checkPassword="+$('#checkPassword').val()+"&email="+$('#email').val(),
+            type: "POST",
+            success: function(result) {
+                $('#getEmailCode').attr('href','#');
+                $('#getEmailCode').css('color','gray');
+                $('#getEmailCode').text('已发送');
+            },
+            error: function(result) {
+                alert(result.msg);
+            }
             });
         }
 </script>

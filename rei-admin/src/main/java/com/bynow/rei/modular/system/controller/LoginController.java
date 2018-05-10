@@ -3,25 +3,24 @@ package com.bynow.rei.modular.system.controller;
 import com.bynow.rei.core.base.controller.BaseController;
 import com.bynow.rei.core.cache.EhcacheFactory;
 import com.bynow.rei.core.cache.ICache;
+import com.bynow.rei.core.common.constant.state.ManagerStatus;
+import com.bynow.rei.core.common.exception.BizExceptionEnum;
 import com.bynow.rei.core.common.exception.InputInvildException;
 import com.bynow.rei.core.common.exception.InvalidKaptchaException;
 import com.bynow.rei.core.common.exception.TwoPwdNotMatchException;
+import com.bynow.rei.core.exception.ReiException;
 import com.bynow.rei.core.log.LogManager;
 import com.bynow.rei.core.log.factory.LogTaskFactory;
 import com.bynow.rei.core.node.MenuNode;
 import com.bynow.rei.core.shiro.ShiroKit;
 import com.bynow.rei.core.shiro.ShiroUser;
 import com.bynow.rei.core.support.HttpKit;
-import com.bynow.rei.core.util.ApiMenuFilter;
-import com.bynow.rei.core.util.KaptchaUtil;
-import com.bynow.rei.core.util.RegexValidateUtil;
-import com.bynow.rei.core.util.ToolUtil;
+import com.bynow.rei.core.util.*;
 import com.bynow.rei.modular.system.model.User;
 import com.bynow.rei.modular.system.service.IMenuService;
 import com.bynow.rei.modular.system.service.IUserService;
 import com.bynow.rei.third.rabbitmq.dto.EmailMessage;
 import com.google.code.kaptcha.Constants;
-import com.google.common.collect.Maps;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -35,8 +34,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -160,14 +159,28 @@ public class LoginController extends BaseController {
         String checkPassword = super.getPara("checkPassword").trim();
         String email = super.getPara("email").trim();
         String code = super.getPara("code").trim();
-
+        if (userService.getByAccount(username)!=null)
+                throw new ReiException(BizExceptionEnum.USER_ALREADY_REG);
         if(!password.equals(checkPassword))
                 throw new TwoPwdNotMatchException();
         if(!RegexValidateUtil.checkEmail(email))
                 throw new InputInvildException();
-        if(!EhcacheFactory.getInstance().get("EMAILCACHE",username).equals(code))
+        if(!EhcacheFactory.getInstance().get("EMAILCACHE",username).equals(code.toUpperCase()))
                 throw new InputInvildException();
-        return REDIRECT + "/login.html";
+
+        User user = new User();
+        user.setCreatetime(new Date());
+        user.setRoleid("6");
+        user.setAccount(username);
+        user.setSalt(ShiroKit.getRandomSalt(5));
+        user.setPassword(ShiroKit.md5(password, user.getSalt()));
+        user.setStatus(ManagerStatus.OK.getCode());
+        user.setEmail(email);
+        user.setDeptid(28);
+        user.setName("REI用户"+CodeUtil.generateUpperString(5));
+        userService.insert(user);
+
+        return "/login.html";
     }
 
     /**
@@ -176,6 +189,8 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "/getEmailCode", method = RequestMethod.POST)
     @ResponseBody
     public void getEmailCode(EmailMessage message) {
+        if (userService.getByAccount(message.getUsername())!=null)
+            throw new ReiException(BizExceptionEnum.USER_ALREADY_REG);
         if(!RegexValidateUtil.checkEmail(message.getEmail()))
             throw new InputInvildException();
         if(!message.getPassword().equals(message.getCheckPassword()))

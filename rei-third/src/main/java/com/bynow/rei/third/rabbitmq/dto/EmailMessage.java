@@ -7,7 +7,7 @@ package com.bynow.rei.third.rabbitmq.dto;
  * @Description:
  * @Date: created in 14:54 2018/5/9
  */
-public class EmailMessage {
+public class EmailMessage implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
 
