@@ -23,7 +23,7 @@ public class SendMailUtil {
     private final static String HOST = "smtp.mxhichina.com";
 
     // SMTP邮件服务器默认端口
-    private final static String PORT = "25";
+    private final static String PORT = "587";
 
     // 是否要求身份认证
     private final static String IS_AUTH = "true";
