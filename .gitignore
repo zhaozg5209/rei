@@ -6,4 +6,5 @@ logs
 .project
 .classpath
 .log
+.yml
 /config/
