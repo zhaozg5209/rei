@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bynow.rei.modular.blog.dao.CenterMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bynow.rei.modular.blog.model.Center">
+        <id column="id" property="id" />
+        <result column="motto" property="motto" />
+        <result column="birthday" property="birthday" />
+        <result column="work_years" property="workYears" />
+        <result column="address" property="address" />
+        <result column="company" property="company" />
+        <result column="industry" property="industry" />
+        <result column="simple_desc" property="simpleDesc" />
+        <result column="detail" property="detail" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, motto, birthday, work_years AS workYears, address, company, industry, simple_desc AS simpleDesc, detail
+    </sql>
+
+</mapper>

@@ -1,0 +1,36 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="id" name="主键" underline="true"/>
+                            <#input id="motto" name="座右铭" underline="true"/>
+                            <#input id="birthday" name="出生年月" underline="true"/>
+                            <#input id="workYears" name="工作年限" underline="true"/>
+                            <#input id="address" name="居住地"/>
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="company" name="公司" underline="true"/>
+                            <#input id="industry" name="行业" underline="true"/>
+                            <#input id="simpleDesc" name="职业简介" underline="true"/>
+                            <#input id="detail" name="详细介绍" underline="true"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="CenterInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="CenterInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/blog/center/center_info.js"></script>
+@}

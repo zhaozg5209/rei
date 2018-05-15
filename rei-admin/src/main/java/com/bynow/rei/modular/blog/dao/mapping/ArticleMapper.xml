@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bynow.rei.modular.blog.dao.ArticleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.bynow.rei.modular.blog.model.Article">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="category_id" property="categoryId" />
+        <result column="author" property="author" />
+        <result column="title" property="title" />
+        <result column="copy_from" property="copyFrom" />
+        <result column="simple_desc" property="simpleDesc" />
+        <result column="banner_url" property="bannerUrl" />
+        <result column="keywords" property="keywords" />
+        <result column="detail" property="detail" />
+        <result column="on_show" property="onShow" />
+        <result column="hits" property="hits" />
+        <result column="post_num" property="postNum" />
+        <result column="create_status" property="createStatus" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id AS userId, category_id AS categoryId, author, title, copy_from AS copyFrom, simple_desc AS simpleDesc, banner_url AS bannerUrl, keywords, detail, on_show AS onShow, hits, post_num AS postNum, create_status AS createStatus, create_time AS createTime, update_time AS updateTime
+    </sql>
+
+</mapper>
