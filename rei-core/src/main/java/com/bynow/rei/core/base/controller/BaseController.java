@@ -1,10 +1,6 @@
 package com.bynow.rei.core.base.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
-import com.bynow.rei.core.base.warpper.BaseControllerWarpper;
-import com.bynow.rei.core.page.PageInfoBT;
-import com.bynow.rei.core.support.HttpKit;
-import com.bynow.rei.core.util.FileUtil;
 import com.bynow.rei.core.base.tips.SuccessTip;
 import com.bynow.rei.core.base.warpper.BaseControllerWarpper;
 import com.bynow.rei.core.page.PageInfoBT;

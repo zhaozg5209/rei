@@ -54,7 +54,7 @@ Article.openAddArticle = function () {
     var index = layer.open({
         type: 2,
         title: '添加文章管理',
-        area: ['800px', '420px'], //宽高
+        area: ['100%', '100%'], //宽高
         fix: false, //不固定
         maxmin: true,
         content: Feng.ctxPath + '/article/article_add'
@@ -70,7 +70,7 @@ Article.openArticleDetail = function () {
         var index = layer.open({
             type: 2,
             title: '文章管理详情',
-            area: ['800px', '420px'], //宽高
+            area: ['100%', '100%'], //宽高
             fix: false, //不固定
             maxmin: true,
             content: Feng.ctxPath + '/article/article_update/' + Article.seItem.id
