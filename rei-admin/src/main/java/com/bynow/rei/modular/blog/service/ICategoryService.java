@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.service.IService;
  * 博客类别表 服务类
  * </p>
  *
- * @author bynow123
+ * @author bynow
  * @since 2018-05-15
  */
 public interface ICategoryService extends IService<Category> {

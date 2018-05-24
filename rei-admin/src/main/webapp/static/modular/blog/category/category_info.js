@@ -61,6 +61,15 @@ CategoryInfoDlg.addSubmit = function() {
     this.clearData();
     this.collectData();
 
+    if($("#name").val() == ""){
+        Feng.error("类别名称不能为空");
+        return;
+    }
+    if($("#onShow").val() == ""){
+        Feng.error("请选择展示规则");
+        return;
+    }
+
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/category/add", function(data){
         Feng.success("添加成功!");
@@ -81,6 +90,14 @@ CategoryInfoDlg.editSubmit = function() {
     this.clearData();
     this.collectData();
 
+    if($("#name").val() == ""){
+        Feng.error("类别名称不能为空");
+        return;
+    }
+    if($("#onShow").val() == ""){
+        Feng.error("请选择展示规则");
+        return;
+    }
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/category/update", function(data){
         Feng.success("修改成功!");

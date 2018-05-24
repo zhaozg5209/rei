@@ -1,16 +1,21 @@
 package com.bynow.rei.modular.blog.controller;
 
 import com.bynow.rei.core.base.controller.BaseController;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.bynow.rei.core.log.LogObjectHolder;
-import org.springframework.web.bind.annotation.RequestParam;
+import com.bynow.rei.core.util.ReiUtil;
 import com.bynow.rei.modular.blog.model.Category;
 import com.bynow.rei.modular.blog.service.ICategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 博客类别控制器
@@ -60,7 +65,11 @@ public class CategoryController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String condition) {
-        return categoryService.selectList(null);
+        if (ReiUtil.getInstance().checkUserIsAdmin())
+            return categoryService.selectList(null);
+        Map<String,Object> map = new HashMap<>();
+        map.put("user_id",ReiUtil.getInstance().getCurrentUserId());
+        return categoryService.selectByMap(map);
     }
 
     /**
@@ -69,6 +78,9 @@ public class CategoryController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(Category category) {
+        category.setCreateTime(new Date());
+        category.setUserId(ReiUtil.getInstance().getCurrentUserId());
+        category.setUpdateTime(new Date());
         categoryService.insert(category);
         return SUCCESS_TIP;
     }
@@ -89,6 +101,7 @@ public class CategoryController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(Category category) {
+        category.setUpdateTime(new Date());
         categoryService.updateById(category);
         return SUCCESS_TIP;
     }

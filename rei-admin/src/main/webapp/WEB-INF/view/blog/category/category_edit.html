@@ -7,16 +7,17 @@
 
             <div class="row">
                 <div class="col-sm-6 b-r">
-                            <#input id="id" name="主键id" value="${item.id}" underline="true"/>
-                            <#input id="userId" name="用户id" value="${item.userId}" underline="true"/>
-                            <#input id="name" name="类别名称" value="${item.name}" />
+                            <#input id="name" name="类别名称" value="${item.name}"/>
                 </div>
 
                 <div class="col-sm-6">
-                            <#input id="onShow" name="是否展示" value="${item.onShow}" underline="true"/>
-                            <#input id="updateTime" name="更新时间" value="${item.updateTime}" underline="true"/>
-                            <#input id="createTime" name="创建时间" value="${item.createTime}" />
+                    <#select id="onShow" name="是否展示" underline="true" value="${item.onShow}">
+                    <option value="">请选择</option>
+                    <option value="1">是</option>
+                    <option value="0">否</option>
+                </#select>
                 </div>
+
             </div>
 
             <div class="row btn-group-m-t">
