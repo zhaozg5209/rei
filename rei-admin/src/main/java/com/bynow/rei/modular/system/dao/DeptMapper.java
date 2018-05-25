@@ -3,8 +3,6 @@ package com.bynow.rei.modular.system.dao;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.bynow.rei.core.node.ZTreeNode;
 import com.bynow.rei.modular.system.model.Dept;
-import com.bynow.rei.core.node.ZTreeNode;
-import com.bynow.rei.modular.system.model.Dept;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

@@ -6,12 +6,14 @@
             <input type="hidden" id="id" value="">
 
             <div class="row">
+
                 <div class="col-sm-6 b-r">
-                            <#input id="categoryId" name="类别id" underline="true"/>
+                    <#selectBynow id="labels" name="标签" options="${catList}"  underline="true"/>
+
                             <#input id="author" name="作者" underline="true"/>
                             <#input id="title" name="文章名" underline="true"/>
                             <#input id="copyFrom" name="转载链接" underline="true"/>
-                            <#input id="simpleDesc" name="简单描述" underline="true"/>
+                            <#input id="simpleDesc" name="描述" underline="true"/>
                             <#input id="bannerUrl" name="banner图链接"/>
                 </div>
 
@@ -19,8 +21,6 @@
                             <#input id="keywords" name="关键字  标签" underline="true"/>
                             <#input id="detail" name="内容" underline="true"/>
                             <#input id="onShow" name="是否展示" underline="true"/>
-                            <#input id="hits" name="点击数" underline="true"/>
-                            <#input id="postNum" name="评论数" underline="true"/>
                             <#input id="createStatus" name="原创1;转载0" underline="true"/>
                             <#input id="createTime" name="创建时间" underline="true"/>
                             <#input id="updateTime" name="更新时间" underline="true"/>

@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.bynow.rei.core.node.ZTreeNode;
-import com.bynow.rei.core.node.ZTreeNode;
 import com.bynow.rei.modular.system.dao.DeptMapper;
 import com.bynow.rei.modular.system.model.Dept;
 import com.bynow.rei.modular.system.service.IDeptService;

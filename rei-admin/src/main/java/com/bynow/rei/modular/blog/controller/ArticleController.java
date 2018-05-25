@@ -1,16 +1,22 @@
 package com.bynow.rei.modular.blog.controller;
 
 import com.bynow.rei.core.base.controller.BaseController;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.bynow.rei.core.log.LogObjectHolder;
-import org.springframework.web.bind.annotation.RequestParam;
+import com.bynow.rei.core.util.ReiUtil;
 import com.bynow.rei.modular.blog.model.Article;
 import com.bynow.rei.modular.blog.service.IArticleService;
+import com.bynow.rei.modular.blog.service.ICategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 文章管理控制器
@@ -26,6 +32,9 @@ public class ArticleController extends BaseController {
 
     @Autowired
     private IArticleService articleService;
+    @Autowired
+    private ICategoryService categoryService;
+
 
     /**
      * 跳转到文章管理首页
@@ -39,7 +48,8 @@ public class ArticleController extends BaseController {
      * 跳转到添加文章管理
      */
     @RequestMapping("/article_add")
-    public String articleAdd() {
+    public String articleAdd(Model model){
+        model.addAttribute("catList",categoryService.getKeyValue(ReiUtil.getInstance().getCurrentUserId()));
         return PREFIX + "article_add.html";
     }
 
@@ -60,7 +70,11 @@ public class ArticleController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String condition) {
-        return articleService.selectList(null);
+        if (ReiUtil.getInstance().checkUserIsAdmin())
+            return articleService.selectList(null);
+        Map<String,Object> map = new HashMap<>();
+        map.put("user_id",ReiUtil.getInstance().getCurrentUserId());
+        return articleService.selectByMap(map);
     }
 
     /**
