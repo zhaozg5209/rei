@@ -103,6 +103,13 @@ ArticleInfoDlg.editSubmit = function() {
     ajax.start();
 }
 
-$(function() {
+$(function () {
+    Feng.initValidator("articleInfoForm", ArticleInfoDlg.validateFields);
 
+    //初始化编辑器
+    var E = window.wangEditor;
+    var editor = new E('#editor');
+    editor.create();
+    editor.txt.html($("#contentVal").val());
+    NoticeInfoDlg.editor = editor;
 });

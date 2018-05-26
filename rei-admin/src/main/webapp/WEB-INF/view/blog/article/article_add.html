@@ -8,22 +8,36 @@
             <div class="row">
 
                 <div class="col-sm-6 b-r">
-                    <#selectBynow id="labels" name="标签" options="${catList}"  underline="true"/>
-
-                            <#input id="author" name="作者" underline="true"/>
-                            <#input id="title" name="文章名" underline="true"/>
-                            <#input id="copyFrom" name="转载链接" underline="true"/>
-                            <#input id="simpleDesc" name="描述" underline="true"/>
-                            <#input id="bannerUrl" name="banner图链接"/>
+                    <#input id="title" name="文章名" underline="true"/>
+                    <#input id="author" name="作者" underline="true"/>
+                    <#input id="simpleDesc" name="描述" underline="true"/>
+                    <#input id="bannerUrl" name="banner图链接" underline="true"/>
+                    <#selectBynow id="labels" name="文章类别" options="${catList}"/>
                 </div>
 
                 <div class="col-sm-6">
-                            <#input id="keywords" name="关键字  标签" underline="true"/>
-                            <#input id="detail" name="内容" underline="true"/>
-                            <#input id="onShow" name="是否展示" underline="true"/>
-                            <#input id="createStatus" name="原创1;转载0" underline="true"/>
-                            <#input id="createTime" name="创建时间" underline="true"/>
-                            <#input id="updateTime" name="更新时间" underline="true"/>
+                    <#input id="keywords" name="标签" underline="true"/>
+                    <#select id="onShow" name="是否展示"  underline="true">
+                    <option value="">请选择</option>
+                    <option value="1">是</option>
+                    <option value="0">否</option>
+                    </#select>
+                    <#select id="createStatus" name="是否原创"  underline="true">
+                    <option value="">请选择</option>
+                    <option value="1">是</option>
+                    <option value="0">否</option>
+                    </#select>
+                    <#input id="copyFrom" name="转载链接" underline="true"/>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">内容</label>
+                        <div class="col-sm-11">
+                            <div id="editor" class="editorHeight">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -37,5 +51,6 @@
 
     </div>
 </div>
+<script type="text/javascript" src="//unpkg.com/wangeditor/release/wangEditor.min.js"></script>
 <script src="${ctxPath}/static/modular/blog/article/article_info.js"></script>
 @}
