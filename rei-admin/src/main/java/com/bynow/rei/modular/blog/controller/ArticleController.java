@@ -93,9 +93,6 @@ public class ArticleController extends BaseController {
         if (ToolUtil.isOneEmpty(article)) {
             throw new ReiException(BizExceptionEnum.REQUEST_NULL);
         }
-        System.out.println(article.getDetail());
-        if (article.getDetail()!=null)
-        article.setDetail(article.getDetail().replaceAll("&lt;p&gt;",""));
         article.setCreateTime(new Date());
         article.setUpdateTime(new Date());
         article.setUserId(ReiUtil.getInstance().getCurrentUserId());

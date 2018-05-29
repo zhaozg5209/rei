@@ -23,11 +23,22 @@ Article.initColumn = function () {
         {title: '简单描述', field: 'simpleDesc', visible: true, align: 'center', valign: 'middle'},
         {title: 'banner图链接', field: 'bannerUrl', visible: true, align: 'center', valign: 'middle'},
         {title: '关键字  标签', field: 'keywords', visible: true, align: 'center', valign: 'middle'},
-        {title: '内容', field: 'detail', visible: true, align: 'center', valign: 'middle'},
-        {title: '是否展示', field: 'onShow', visible: true, align: 'center', valign: 'middle'},
+        {title: '是否展示', field: 'onShow', visible: true, align: 'center', valign: 'middle',
+            formatter:function(index){
+                if(index == 1)
+                    return '是';
+                return '否';
+            }
+         },
         {title: '点击数', field: 'hits', visible: true, align: 'center', valign: 'middle'},
         {title: '评论数', field: 'postNum', visible: true, align: 'center', valign: 'middle'},
-        {title: '是否原创', field: 'createStatus', visible: true, align: 'center', valign: 'middle'},
+        {title: '是否原创', field: 'createStatus', visible: true, align: 'center', valign: 'middle',
+            formatter:function(index){
+                if(index == 1)
+                    return '是';
+                return '否';
+            }
+        },
         {title: '创建时间', field: 'createTime', visible: true, align: 'center', valign: 'middle'},
         {title: '更新时间', field: 'updateTime', visible: true, align: 'center', valign: 'middle'}
     ];

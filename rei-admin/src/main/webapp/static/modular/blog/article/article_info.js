@@ -3,16 +3,7 @@
  */
 var ArticleInfoDlg = {
     articleInfoData : {},
-    editor:null,
-    validateFields: {
-        title: {
-            validators: {
-                notEmpty: {
-                    message: '标题不能为空'
-                }
-            }
-        }
-    }
+    editor:null
 };
 
 /**
@@ -74,7 +65,7 @@ ArticleInfoDlg.addSubmit = function() {
 
     this.clearData();
     this.collectData();
-
+    validatorFun();
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/article/add", function(data){
         Feng.success("添加成功!");
@@ -94,7 +85,7 @@ ArticleInfoDlg.editSubmit = function() {
 
     this.clearData();
     this.collectData();
-
+    validatorFun();
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/article/update", function(data){
         Feng.success("修改成功!");
@@ -117,3 +108,39 @@ $(function () {
     editor.txt.html($("#detailVal").val());
     ArticleInfoDlg.editor = editor;
 });
+
+
+function validatorFun(){
+    if($("#title").val() == ""){
+        Feng.error("标题不能为空");
+        return;
+    }
+    if($("#author").val() == ""){
+        Feng.error("作者不能为空");
+        return;
+    }
+    if($("#simpleDesc").val() == ""){
+        Feng.error("描述不能为空");
+        return;
+    }
+    if($("#bannerUrl").val() == ""){
+        Feng.error("图片链接不能为空");
+        return;
+    }
+    if($("#categoryId").val() == ""){
+        Feng.error("文章类别不能为空");
+        return;
+    }
+    if($("#keywords").val() == ""){
+        Feng.error("标签不能为空");
+        return;
+    }
+    if($("#onShow").val() == ""){
+        Feng.error("请选择展示规则");
+        return;
+    }
+    if($("#createStatus").val() == ""){
+        Feng.error("请选择原创或转载");
+        return;
+    }
+}
