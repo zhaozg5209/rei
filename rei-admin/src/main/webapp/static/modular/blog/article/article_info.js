@@ -2,7 +2,17 @@
  * 初始化文章管理详情对话框
  */
 var ArticleInfoDlg = {
-    articleInfoData : {}
+    articleInfoData : {},
+    editor:null,
+    validateFields: {
+        title: {
+            validators: {
+                notEmpty: {
+                    message: '标题不能为空'
+                }
+            }
+        }
+    }
 };
 
 /**
@@ -19,7 +29,7 @@ ArticleInfoDlg.clearData = function() {
  * @param val 数据的具体值
  */
 ArticleInfoDlg.set = function(key, val) {
-    this.articleInfoData[key] = (typeof val == "undefined") ? $("#" + key).val() : val;
+    this.articleInfoData[key] = (typeof value == "undefined") ? $("#" + key).val() : value;
     return this;
 }
 
@@ -44,9 +54,8 @@ ArticleInfoDlg.close = function() {
  * 收集数据
  */
 ArticleInfoDlg.collectData = function() {
+    this.articleInfoData['detail'] = ArticleInfoDlg.editor.txt.html();
     this
-    .set('id')
-    .set('userId')
     .set('categoryId')
     .set('author')
     .set('title')
@@ -54,13 +63,8 @@ ArticleInfoDlg.collectData = function() {
     .set('simpleDesc')
     .set('bannerUrl')
     .set('keywords')
-    .set('detail')
     .set('onShow')
-    .set('hits')
-    .set('postNum')
-    .set('createStatus')
-    .set('createTime')
-    .set('updateTime');
+    .set('createStatus');
 }
 
 /**
@@ -110,6 +114,6 @@ $(function () {
     var E = window.wangEditor;
     var editor = new E('#editor');
     editor.create();
-    editor.txt.html($("#contentVal").val());
-    NoticeInfoDlg.editor = editor;
+    editor.txt.html($("#detailVal").val());
+    ArticleInfoDlg.editor = editor;
 });

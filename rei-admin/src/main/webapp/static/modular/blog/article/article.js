@@ -14,22 +14,22 @@ var Article = {
 Article.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-            {title: '主键', field: 'id', visible: true, align: 'center', valign: 'middle'},
-            {title: '用户id', field: 'userId', visible: true, align: 'center', valign: 'middle'},
-            {title: '类别id', field: 'categoryId', visible: true, align: 'center', valign: 'middle'},
-            {title: '作者', field: 'author', visible: true, align: 'center', valign: 'middle'},
-            {title: '文章名', field: 'title', visible: true, align: 'center', valign: 'middle'},
-            {title: '转载链接', field: 'copyFrom', visible: true, align: 'center', valign: 'middle'},
-            {title: '简单描述', field: 'simpleDesc', visible: true, align: 'center', valign: 'middle'},
-            {title: 'banner图链接', field: 'bannerUrl', visible: true, align: 'center', valign: 'middle'},
-            {title: '关键字  标签', field: 'keywords', visible: true, align: 'center', valign: 'middle'},
-            {title: '内容', field: 'detail', visible: true, align: 'center', valign: 'middle'},
-            {title: '是否展示', field: 'onShow', visible: true, align: 'center', valign: 'middle'},
-            {title: '点击数', field: 'hits', visible: true, align: 'center', valign: 'middle'},
-            {title: '评论数', field: 'postNum', visible: true, align: 'center', valign: 'middle'},
-            {title: '原创1;转载0', field: 'createStatus', visible: true, align: 'center', valign: 'middle'},
-            {title: '创建时间', field: 'createTime', visible: true, align: 'center', valign: 'middle'},
-            {title: '更新时间', field: 'updateTime', visible: true, align: 'center', valign: 'middle'}
+        {title: '主键', field: 'id', visible: true, align: 'center', valign: 'middle'},
+        {title: '用户id', field: 'userId', visible: true, align: 'center', valign: 'middle'},
+        {title: '类别id', field: 'categoryId', visible: true, align: 'center', valign: 'middle'},
+        {title: '作者', field: 'author', visible: true, align: 'center', valign: 'middle'},
+        {title: '文章名', field: 'title', visible: true, align: 'center', valign: 'middle'},
+        {title: '转载链接', field: 'copyFrom', visible: true, align: 'center', valign: 'middle'},
+        {title: '简单描述', field: 'simpleDesc', visible: true, align: 'center', valign: 'middle'},
+        {title: 'banner图链接', field: 'bannerUrl', visible: true, align: 'center', valign: 'middle'},
+        {title: '关键字  标签', field: 'keywords', visible: true, align: 'center', valign: 'middle'},
+        {title: '内容', field: 'detail', visible: true, align: 'center', valign: 'middle'},
+        {title: '是否展示', field: 'onShow', visible: true, align: 'center', valign: 'middle'},
+        {title: '点击数', field: 'hits', visible: true, align: 'center', valign: 'middle'},
+        {title: '评论数', field: 'postNum', visible: true, align: 'center', valign: 'middle'},
+        {title: '是否原创', field: 'createStatus', visible: true, align: 'center', valign: 'middle'},
+        {title: '创建时间', field: 'createTime', visible: true, align: 'center', valign: 'middle'},
+        {title: '更新时间', field: 'updateTime', visible: true, align: 'center', valign: 'middle'}
     ];
 };
 

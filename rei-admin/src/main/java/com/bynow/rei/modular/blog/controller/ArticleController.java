@@ -1,8 +1,11 @@
 package com.bynow.rei.modular.blog.controller;
 
 import com.bynow.rei.core.base.controller.BaseController;
+import com.bynow.rei.core.common.exception.BizExceptionEnum;
+import com.bynow.rei.core.exception.ReiException;
 import com.bynow.rei.core.log.LogObjectHolder;
 import com.bynow.rei.core.util.ReiUtil;
+import com.bynow.rei.core.util.ToolUtil;
 import com.bynow.rei.modular.blog.model.Article;
 import com.bynow.rei.modular.blog.service.IArticleService;
 import com.bynow.rei.modular.blog.service.ICategoryService;
@@ -13,7 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.HtmlUtils;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,7 +64,9 @@ public class ArticleController extends BaseController {
     @RequestMapping("/article_update/{articleId}")
     public String articleUpdate(@PathVariable Integer articleId, Model model) {
         Article article = articleService.selectById(articleId);
+        article.setDetail(HtmlUtils.htmlUnescape(article.getDetail()));
         model.addAttribute("item",article);
+        model.addAttribute("catList",categoryService.getKeyValue(ReiUtil.getInstance().getCurrentUserId()));
         LogObjectHolder.me().set(article);
         return PREFIX + "article_edit.html";
     }
@@ -83,6 +90,15 @@ public class ArticleController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(Article article) {
+        if (ToolUtil.isOneEmpty(article)) {
+            throw new ReiException(BizExceptionEnum.REQUEST_NULL);
+        }
+        System.out.println(article.getDetail());
+        if (article.getDetail()!=null)
+        article.setDetail(article.getDetail().replaceAll("&lt;p&gt;",""));
+        article.setCreateTime(new Date());
+        article.setUpdateTime(new Date());
+        article.setUserId(ReiUtil.getInstance().getCurrentUserId());
         articleService.insert(article);
         return SUCCESS_TIP;
     }
