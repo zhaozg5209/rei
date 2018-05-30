@@ -1,7 +1,7 @@
 @layout("/common/_container.html"){
 <div class="ibox float-e-margins">
     <div class="ibox-content">
-        <div class="form-horizontal">
+        <div class="form-horizontal" id="articleInfoForm">
 
             <input type="hidden" id="id" value="">
 
@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="col-sm-6">
-                    <#input id="keywords" name="标签" underline="true"/>
+                    <#input id="keywords" name="标签(用逗号隔开)" underline="true"/>
                     <#select id="onShow" name="是否展示"  underline="true">
                     <option value="">请选择</option>
                     <option value="1">是</option>

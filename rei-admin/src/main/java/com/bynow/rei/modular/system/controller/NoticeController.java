@@ -1,6 +1,5 @@
 package com.bynow.rei.modular.system.controller;
 
-import com.bynow.rei.core.exception.ReiException;
 import com.bynow.rei.core.base.controller.BaseController;
 import com.bynow.rei.core.common.annotion.BussinessLog;
 import com.bynow.rei.core.common.constant.dictmap.NoticeMap;

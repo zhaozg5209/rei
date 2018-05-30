@@ -1,10 +1,13 @@
 @layout("/common/_container.html"){
 <div class="ibox float-e-margins">
     <div class="ibox-content">
-        <div class="form-horizontal">
+        <div class="form-horizontal" id="articleInfoForm">
+
+            <input id="id" type="hidden" value="${item.id}"/>
+            <input type="hidden" id="contentVal" value=" ${item.detail}">
+
             <div class="row">
-                <input id="id" type="hidden" value="${item.id}"/>
-                <input type="hidden" id="detailVal" value=" ${item.detail}">
+
                 <div class="col-sm-6 b-r">
                     <#input id="title" name="文章名" value="${item.title}" underline="true"/>
                     <#input id="author" name="作者" value="${item.author}" underline="true"/>

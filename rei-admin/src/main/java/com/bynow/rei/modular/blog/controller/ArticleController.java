@@ -20,13 +20,12 @@ import org.springframework.web.util.HtmlUtils;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * 文章管理控制器
  *
- * @author fengshuonan
+ * @author bynow
  * @Date 2018-05-15 14:39:43
  */
 @Controller
