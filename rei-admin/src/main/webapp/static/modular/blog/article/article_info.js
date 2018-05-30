@@ -114,7 +114,7 @@ ArticleInfoDlg.addSubmit = function () {
         Feng.error("请选择展示规则");
         return;
     }
-    if(!$("#keywords").val().contains(",")){
+    if($("#keywords").val().indexOf(",") == -1){
         Feng.error("请把关键字拿英文逗号隔开");
         return;
     }
@@ -150,7 +150,7 @@ ArticleInfoDlg.editSubmit = function () {
         Feng.error("请选择展示规则");
         return;
     }
-    if(!$("#keywords").val().contains(",")){
+    if($("#keywords").val().indexOf(",") == -1){
         Feng.error("请把关键字拿英文逗号隔开");
         return;
     }
